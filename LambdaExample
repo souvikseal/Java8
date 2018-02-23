@@ -1,0 +1,19 @@
+public class LambdaExample{
+
+     public static void main(String []args){
+        //using anonymous class
+        TestI t1 = new TestI(){
+            public int add(int a, int b){
+                return a+b;
+            }
+        };
+        System.out.println(t1.add(6,90));
+        
+        //using lambda
+        TestI t2 = (a,b)->a+b;
+        System.out.println(t2.add(6,9));
+        
+     }
+     //functional interface for addition
+     interface TestI{ int add(int a,int b);}
+}
