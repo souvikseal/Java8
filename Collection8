@@ -66,9 +66,7 @@ public class Collection8 {
 
 		Map<String, Integer> map = secList.stream()
 				.collect(Collectors.groupingBy(Section::getCourse, Collectors.summingInt(Section::getNumStudents)));
-		for (Map.Entry<String, Integer> entry : map.entrySet()) {
-			System.out.println(entry.getValue() + ":" + entry.getKey());
-		}
+		map.forEach((x,y)->System.out.println(y+":"+x));
 		//18:Maths
 		//60:English
 		//30:Physics
