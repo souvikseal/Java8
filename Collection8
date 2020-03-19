@@ -5,6 +5,8 @@ import java.util.Comparator;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
 public class Collection8 {
@@ -15,6 +17,17 @@ public class Collection8 {
 		list.add(8);
 		list.add(8);
 		list.add(6);
+		
+		//average
+		OptionalDouble avg = list.stream().mapToDouble((x)->x).average();
+		System.out.println(avg.getAsDouble());
+		//6.5
+		
+		//query
+		Optional<Integer> opt = list.stream().filter((x)->x>6).findAny();
+		System.out.println(opt.get());
+		//8
+		
 		// summary stat
 		DoubleSummaryStatistics summary = list.stream().mapToDouble((x) -> x).summaryStatistics();
 		System.out.println(summary);
