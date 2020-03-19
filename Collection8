@@ -28,6 +28,13 @@ public class Collection8 {
 		System.out.println(opt.get());
 		//8
 		
+		//iterate with forEach
+		list.stream().forEach((x)->System.out.println(x));
+		//4
+		//8
+		//8
+		//6
+		
 		// summary stat
 		DoubleSummaryStatistics summary = list.stream().mapToDouble((x) -> x).summaryStatistics();
 		System.out.println(summary);
