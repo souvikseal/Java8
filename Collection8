@@ -1,0 +1,86 @@
+package testPack;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.DoubleSummaryStatistics;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class Collection8 {
+
+	public static void main(String[] args) {
+		List<Integer> list = new ArrayList<>();
+		list.add(4);
+		list.add(8);
+		list.add(8);
+		list.add(6);
+		// summary stat
+		DoubleSummaryStatistics summary = list.stream().mapToDouble((x) -> x).summaryStatistics();
+		System.out.println(summary);
+		// DoubleSummaryStatistics{count=4, sum=26.000000, min=4.000000,
+		// average=6.500000, max=8.000000}
+
+		// distinct numbers from a list
+		List<Integer> distinctList = list.stream().distinct().collect(Collectors.toList());
+		System.out.println(distinctList);
+		// [4, 8, 6]
+		Comparator<Integer> comp = new Comparator<Integer>() {
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				return o2 - o1;
+			}
+		};
+
+		// top 2 numbers
+		List<Integer> top2Numbers = list.stream().sorted(comp).limit(2).collect(Collectors.toList());
+		System.out.println(top2Numbers);
+		// [8, 8]
+
+		//Database group by by summing
+		List<Section> secList = new ArrayList<Section>();
+		secList.add(new Section(20, "English"));
+		secList.add(new Section(18, "Maths"));
+		secList.add(new Section(40, "English"));
+		secList.add(new Section(30, "Physics"));
+
+		Map<String, Integer> map = secList.stream()
+				.collect(Collectors.groupingBy(Section::getCourse, Collectors.summingInt(Section::getNumStudents)));
+		for (Map.Entry<String, Integer> entry : map.entrySet()) {
+			System.out.println(entry.getValue() + ":" + entry.getKey());
+		}
+		//18:Maths
+		//60:English
+		//30:Physics
+	}
+}
+
+class Section {
+	Integer numStudents;
+	String course;
+
+	public Section() {
+
+	}
+
+	public Section(Integer numStudents, String course) {
+		this.numStudents = numStudents;
+		this.course = course;
+	}
+
+	public Integer getNumStudents() {
+		return numStudents;
+	}
+
+	public void setNumStudents(Integer numStudents) {
+		this.numStudents = numStudents;
+	}
+
+	public String getCourse() {
+		return course;
+	}
+
+	public void setCourse(String course) {
+		this.course = course;
+	}
+}
