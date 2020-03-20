@@ -70,6 +70,16 @@ public class Collection8 {
 		//18:Maths
 		//60:English
 		//30:Physics
+		
+		//find max using reduce
+		Integer max = list.stream().reduce((i1, i2)->i1>i2?i1:i2).orElse(-1);
+		System.out.println("Max:"+ max);
+		//Max:8
+		
+		List<Integer> emptyList = new ArrayList<>();
+		max = emptyList.stream().reduce((i1, i2)->i1>i2?i1:i2).orElse(-1);
+		System.out.println("Max:"+ max);
+		//Max:-1
 	}
 }
 
